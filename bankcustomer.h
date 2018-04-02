@@ -19,6 +19,7 @@ public:
 	void Withdraw(int money);
 	virtual void ShowAccountInfo() const;
 	int GetAccountID() const;
+	void operator=(const Account& copy);
 	virtual ~Account();
 };
 
@@ -39,9 +40,34 @@ public:
 	void Deposit(int money);
 	void ShowAccountInfo() const;
 };
+typedef Account * ACCOUNT_PTR;
+class AccountArray
+{
+	ACCOUNT_PTR * arr;
+	int arrlen;
+public:
+	AccountArray(int arrlen) : arrlen(arrlen)
+	{
+		arr = new ACCOUNT_PTR[arrlen];
+	}
+	ACCOUNT_PTR& operator[](int idx)
+	{
+		//if(idx < 0 || idx >= arrlen)
+		return arr[idx];
+	}
+	ACCOUNT_PTR& operator[](int idx) const
+	{
+		//if(idx < 0 || idx >= arrlen)
+		return arr[idx];
+	}
+	int GetArrLen() const
+	{
+		return arrlen;
+	}
+};
 class AccountHandler
 {
-	Account ** customers;
+	AccountArray customers;
 	int customerNum;
 public:
 	AccountHandler();
@@ -51,7 +77,7 @@ public:
 	void ShowMenu() const;
 	void ShowCustomerInfo() const;
 	int GetCustomerNumber() const;
-	Account* GetCustomerAccountByID(int accountID) const;
+	ACCOUNT_PTR GetCustomerAccountByID(int accountID) const;
 	~AccountHandler();
 };
 

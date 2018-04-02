@@ -11,43 +11,44 @@ Account::Account(int accountID, char * customerName, int money)
 	this->customerName = new char[strlen(customerName) + 1];
 	strcpy(this->customerName, customerName);
 }
-
 Account::Account(const Account& copy)
 	: accountID(copy.accountID), money(copy.money)
 {
 	customerName = new char[strlen(copy.customerName) + 1];
 	strcpy(customerName, copy.customerName);
 }
-
 void Account::Deposit(int money)
 {
 	this->money += money;
 }
-
 void Account::Withdraw(int money)
 {
 	this->money -= money;
 }
-
 void Account::ShowAccountInfo() const
 {
 	std::cout<<"°èÁÂID: "<<accountID<<std::endl;
 	std::cout<<"ÀÌ ¸§: "<<customerName<<std::endl;
 	std::cout<<"ÀÜ ¾×: "<<money<<std::endl;
 }
-
 int Account::GetAccountID() const
 {
 	return accountID;
 }
-
+void Account::operator=(const Account& copy)
+{
+	this->accountID = copy.accountID;
+	delete []customerName;
+	customerName = new char[strlen(copy.customerName) + 1];
+	strcpy(customerName, copy.customerName);
+}
 Account::~Account()
 {
 	delete []customerName;
 }
 
 AccountHandler::AccountHandler()
-	: customers(new Account*[10]), customerNum(0) {}
+	: customers(10), customerNum(0) {}
 
 void AccountHandler::CreateAccount()
 {
@@ -169,7 +170,7 @@ int AccountHandler::GetCustomerNumber() const
 	return customerNum;
 }
 
-Account* AccountHandler::GetCustomerAccountByID(int accountID) const
+ACCOUNT_PTR AccountHandler::GetCustomerAccountByID(int accountID) const
 {
 	for(int i = 0; i < customerNum; i++)
 	{
@@ -187,5 +188,4 @@ AccountHandler::~AccountHandler()
 	{
 		delete customers[i];
 	}
-	delete []customers;
 }
