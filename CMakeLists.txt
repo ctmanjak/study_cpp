@@ -33,6 +33,8 @@ SET ( SRC_FILES
 
 		bankcustomer.cpp
 
+		jstring.cpp
+
         )
 
 

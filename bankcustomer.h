@@ -1,6 +1,7 @@
 #ifndef __bankcustomer_h__
 #define __bankcustomer_h__
 #include <iostream>
+#include "jstring.h"
 
 namespace CREDIT_RATING
 {
@@ -10,24 +11,24 @@ namespace CREDIT_RATING
 class Account
 {
 	int accountID, money;
-	char * customerName;
+	String customerName;
 public:
 	Account();
-	Account(int accountID, char * customerName, int money);
+	Account(int accountID, String customerName, int money);
 	Account(const Account& copy);
 	virtual void Deposit(int money);
 	void Withdraw(int money);
 	virtual void ShowAccountInfo() const;
 	int GetAccountID() const;
-	void operator=(const Account& copy);
-	virtual ~Account();
+	Account& operator=(const Account& copy);
+	virtual ~Account() {};
 };
 
 class NormalAccount : public Account
 {
 	int interest;
 public:
-	NormalAccount(int accountID, char * customerName, int money, int interest);
+	NormalAccount(int accountID, String customerName, int money, int interest);
 	void Deposit(int money);
 	void ShowAccountInfo() const;
 };
@@ -36,7 +37,7 @@ class HighCreditAccount : public NormalAccount
 {
 	int rating;
 public:
-	HighCreditAccount(int accountID, char * customerName, int money, int interest, int rating);
+	HighCreditAccount(int accountID, String customerName, int money, int interest, int rating);
 	void Deposit(int money);
 	void ShowAccountInfo() const;
 };

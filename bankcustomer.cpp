@@ -5,17 +5,15 @@
 Account::Account()
 	: accountID(0), money(0), customerName(NULL) {}
 
-Account::Account(int accountID, char * customerName, int money)
+Account::Account(int accountID, String customerName, int money)
 	: accountID(accountID), money(money)
 {
-	this->customerName = new char[strlen(customerName) + 1];
-	strcpy(this->customerName, customerName);
+	this->customerName = customerName;
 }
 Account::Account(const Account& copy)
 	: accountID(copy.accountID), money(copy.money)
 {
-	customerName = new char[strlen(copy.customerName) + 1];
-	strcpy(customerName, copy.customerName);
+	customerName = copy.customerName;
 }
 void Account::Deposit(int money)
 {
@@ -35,16 +33,11 @@ int Account::GetAccountID() const
 {
 	return accountID;
 }
-void Account::operator=(const Account& copy)
+Account& Account::operator=(const Account& copy)
 {
 	this->accountID = copy.accountID;
-	delete []customerName;
-	customerName = new char[strlen(copy.customerName) + 1];
-	strcpy(customerName, copy.customerName);
-}
-Account::~Account()
-{
-	delete []customerName;
+	customerName = copy.customerName;
+	return *this;
 }
 
 AccountHandler::AccountHandler()
@@ -93,7 +86,7 @@ void AccountHandler::CreateAccount()
 	}
 }
 
-NormalAccount::NormalAccount(int accountID, char * customerName, int money, int interest)
+NormalAccount::NormalAccount(int accountID, String customerName, int money, int interest)
 	: Account(accountID, customerName, money), interest(interest) {}
 void NormalAccount::Deposit(int money)
 {
@@ -105,7 +98,7 @@ void NormalAccount::ShowAccountInfo() const
 	std::cout<<"ÀÌÀÚÀ²: "<<interest<<std::endl;
 }
 
-HighCreditAccount::HighCreditAccount(int accountID, char * customerName, int money, int interest, int rating)
+HighCreditAccount::HighCreditAccount(int accountID, String customerName, int money, int interest, int rating)
 	: NormalAccount(accountID, customerName, money, interest), rating(rating) {}
 void HighCreditAccount::Deposit(int money)
 {
