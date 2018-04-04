@@ -42,6 +42,7 @@ public:
 	void ShowAccountInfo() const;
 };
 typedef Account * ACCOUNT_PTR;
+
 class AccountArray
 {
 	ACCOUNT_PTR * arr;
