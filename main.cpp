@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include "bankcustomer.h"
+#include "accounthandler.h"
 
 int main(void)
 {

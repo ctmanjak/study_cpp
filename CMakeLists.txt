@@ -31,7 +31,9 @@ SET ( SRC_FILES
 
 		main.cpp
 
-		bankcustomer.cpp
+		account.cpp
+
+		accounthandler.cpp
 
 		jstring.cpp
 

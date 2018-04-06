@@ -43,44 +43,5 @@ public:
 };
 typedef Account * ACCOUNT_PTR;
 
-class AccountArray
-{
-	ACCOUNT_PTR * arr;
-	int arrlen;
-public:
-	AccountArray(int arrlen) : arrlen(arrlen)
-	{
-		arr = new ACCOUNT_PTR[arrlen];
-	}
-	ACCOUNT_PTR& operator[](int idx)
-	{
-		//if(idx < 0 || idx >= arrlen)
-		return arr[idx];
-	}
-	ACCOUNT_PTR& operator[](int idx) const
-	{
-		//if(idx < 0 || idx >= arrlen)
-		return arr[idx];
-	}
-	int GetArrLen() const
-	{
-		return arrlen;
-	}
-};
-class AccountHandler
-{
-	AccountArray customers;
-	int customerNum;
-public:
-	AccountHandler();
-	void CreateAccount();
-	void Deposit();
-	void Withdraw();
-	void ShowMenu() const;
-	void ShowCustomerInfo() const;
-	int GetCustomerNumber() const;
-	ACCOUNT_PTR GetCustomerAccountByID(int accountID) const;
-	~AccountHandler();
-};
 
 #endif
