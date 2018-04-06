@@ -5,19 +5,19 @@
 template <class T>
 class BoundCheckArray
 {
-	T ** arr;
+	T * arr;
 	int arrlen;
 public:
 	BoundCheckArray(int arrlen) : arrlen(arrlen)
 	{
-		arr = new T*[arrlen];
+		arr = new T[arrlen];
 	}
-	T*& operator[](int idx)
+	T& operator[](int idx)
 	{
 		//if(idx < 0 || idx >= arrlen)
 		return arr[idx];
 	}
-	T*& operator[](int idx) const
+	T& operator[](int idx) const
 	{
 		//if(idx < 0 || idx >= arrlen)
 		return arr[idx];
@@ -25,6 +25,10 @@ public:
 	int GetArrLen() const
 	{
 		return arrlen;
+	}
+	~BoundCheckArray()
+	{
+		delete []arr;
 	}
 };
 

@@ -5,7 +5,7 @@
 
 class AccountHandler
 {
-	BoundCheckArray<Account> customers;
+	BoundCheckArray<ACCOUNT_PTR> customers;
 	int customerNum;
 public:
 	AccountHandler();
