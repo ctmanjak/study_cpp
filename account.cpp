@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "account.h"
+#include "exception.h"
 
 Account::Account()
 	: accountID(0), money(0), customerName(NULL) {}
@@ -17,10 +18,19 @@ Account::Account(const Account& copy)
 }
 void Account::Deposit(int money)
 {
+	if(money < 0)
+		throw WrongRequestException(money);
+		
 	this->money += money;
 }
 void Account::Withdraw(int money)
 {
+	if(money < 0)
+		throw WrongRequestException(money);
+
+	if(money > this->money)
+		throw WithdrawException(this->money, money);
+
 	this->money -= money;
 }
 void Account::ShowAccountInfo() const

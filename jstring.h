@@ -1,5 +1,5 @@
-#ifndef __STRING_H__
-#define __STRING_H__
+#ifndef __JSTRING_H__
+#define __JSTRING_H__
 #include <iostream>
 using std::istream;
 using std::ostream;

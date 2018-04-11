@@ -1,4 +1,5 @@
 #include "accounthandler.h"
+#include "exception.h"
 
 AccountHandler::AccountHandler()
 	: customers(10), customerNum(0) {}
@@ -50,22 +51,47 @@ void AccountHandler::Deposit()
 {
 	int accountID, money;
 
-	std::cout<<"°èÁÂID: ";
-	std::cin>>accountID;
-	std::cout<<"ÀÔ±Ý¾×: ";
-	std::cin>>money;
-	GetCustomerAccountByID(accountID)->Deposit(money);
+	while(true)
+	{
+		try
+		{
+			std::cout<<"°èÁÂID: ";
+			std::cin>>accountID;
+			std::cout<<"ÀÔ±Ý¾×: ";
+			std::cin>>money;
+			GetCustomerAccountByID(accountID)->Deposit(money);
+		}
+		catch(WrongRequestException& expn)
+		{
+			expn.ShowException();
+		}
+	}
 }
 
 void AccountHandler::Withdraw()
 {
 	int accountID, money;
 
-	std::cout<<"°èÁÂID: ";
-	std::cin>>accountID;
-	std::cout<<"Ãâ±Ý¾×: ";
-	std::cin>>money;
-	GetCustomerAccountByID(accountID)->Withdraw(money);
+	while(true)
+	{
+		try
+		{
+			std::cout<<"°èÁÂID: ";
+			std::cin>>accountID;
+			std::cout<<"Ãâ±Ý¾×: ";
+			std::cin>>money;
+			GetCustomerAccountByID(accountID)->Withdraw(money);
+			break;
+		}
+		catch(WithdrawException& expn)
+		{
+			expn.ShowException();
+		}
+		catch(WrongRequestException& expn)
+		{
+			expn.ShowException();
+		}
+	}
 }
 
 void AccountHandler::ShowMenu() const

@@ -1,5 +1,5 @@
-#ifndef __bankcustomer_h__
-#define __bankcustomer_h__
+#ifndef __ACCOUNT_H__
+#define __ACCOUNT_H__
 #include <iostream>
 #include "jstring.h"
 

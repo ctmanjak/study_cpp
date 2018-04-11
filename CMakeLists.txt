@@ -37,6 +37,8 @@ SET ( SRC_FILES
 
 		jstring.cpp
 
+		exception.cpp
+
         )
 
 
